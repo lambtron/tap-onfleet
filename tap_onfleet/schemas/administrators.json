@@ -1,0 +1,69 @@
+{
+  "type": [
+    "null",
+    "object"
+  ],
+  "properties": {
+    "id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "timeCreated": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "timeLastModified": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "organization": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "email": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "isActive": {
+      "type": [
+        "null",
+        "boolean"
+      ]
+    },
+    "phone": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "metadata": {
+      "type": [
+        "null",
+        "array"
+      ],
+      "items": {}
+    }
+  }
+}
