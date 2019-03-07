@@ -28,7 +28,6 @@ This config is to authenticate into Recurly. The `quota_limit` is the percentage
 {
   "start_date" : "2017-01-01T00:00:00Z",
   "user_agent" : "stitch(+support@stitchdata.com)",
-  "subdomain": "lambtron",
   "api_key": "99xxxx",
   "quota_limit": 50
 }
