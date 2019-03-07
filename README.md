@@ -102,10 +102,17 @@ Messages are written to standard output following the Singer specification. The 
 
 ### Incremental
 
-TODO.
+- administrators
+- hubs
+- organizations
+- tasks
+- teams
+- workers
+
+All bookmarks are `lastTimeModified` with a datetime.
 
 ### Full Table
 
-TODO.
+- none
 
 Copyright &copy; 2019 Stitch
