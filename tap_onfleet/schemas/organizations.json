@@ -19,8 +19,9 @@
     "timeLastModified": {
       "type": [
         "null",
-        "number"
-      ]
+        "string"
+      ],
+      "format": "date-time"
     },
     "name": {
       "type": [

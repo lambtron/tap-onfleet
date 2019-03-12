@@ -4,6 +4,7 @@
 #
 
 from datetime import datetime, timedelta
+from requests.auth import HTTPBasicAuth
 from singer import utils
 import backoff
 import requests
@@ -22,11 +23,12 @@ class Onfleet(object):
     self.user_agent = user_agent
     self.start_date = start_date
     self.quota_limit = quota_limit
-    self.uri = "https://{api_key}:@onfleet.com/api/v2/".format(api_key=api_key)
+    self.api_key = api_key
+    self.uri = "https://onfleet.com/api/v2/"
 
 
   def check_rate_limit(self, rate_limit_remaining=None, rate_limit_limit=None):
-    print(float(rate_limit_remaining) / float(rate_limit_limit) * 100)
+    # print(float(rate_limit_remaining) / float(rate_limit_limit) * 100)
     # print(type(rate_limit_remaining))
     # print(rate_limit_limit)
     # print(type(rate_limit_limit))
@@ -40,21 +42,11 @@ class Onfleet(object):
   def _get(self, path, **kwargs):
     uri = "{uri}{path}".format(uri=self.uri, path=path)
     logger.info("GET request to {uri}".format(uri=uri))
-    response = requests.get(uri)
+    response = requests.get(uri, auth=HTTPBasicAuth(self.api_key, ''))
     response.raise_for_status()
-    # self.check_rate_limit(response.headers.get('X-RateLimit-Remaining'), response.headers.get('X-RateLimit-Limit'))
+    self.check_rate_limit(response.headers.get('X-RateLimit-Remaining'), response.headers.get('X-RateLimit-Limit'))
     return response.json()
 
-
-  # def _get_all(self, path, **kwargs):
-  #   has_more = True
-  #   while has_more:
-  #     json = self._get(path)
-  #     has_more = json["has_more"]
-  #     path = json["next"]
-  #     data = json["data"]
-  #     for item in data:
-  #       yield item
 
   # 
   # Methods to retrieve data per stream/resource.

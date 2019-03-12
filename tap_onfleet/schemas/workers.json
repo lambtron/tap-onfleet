@@ -19,8 +19,9 @@
     "timeLastModified": {
       "type": [
         "null",
-        "number"
-      ]
+        "string"
+      ],
+      "format": "date-time"
     },
     "organization": {
       "type": [
@@ -186,8 +187,9 @@
         "timeLastModified": {
           "type": [
             "null",
-            "number"
-          ]
+            "string"
+          ],
+          "format": "date-time"
         }
       }
     }
