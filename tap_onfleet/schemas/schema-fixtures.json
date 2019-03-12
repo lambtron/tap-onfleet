@@ -1,7 +1,7 @@
 {  
   "organizations": {
     "id":"string",
-    "timeCreated":"number",
+    "timeCreated":"2019-02-25T20:13:10Z",
     "timeLastModified":"2019-02-25T20:13:10Z",
     "name":"string",
     "email":"string",
@@ -12,7 +12,7 @@
   },
   "administrators": {  
     "id":"string",
-    "timeCreated":"number",
+    "timeCreated":"2019-02-25T20:13:10Z",
     "timeLastModified":"2019-02-25T20:13:10Z",
     "organization":"string",
     "email":"string",
@@ -26,7 +26,7 @@
   }, 
   "workers": {  
     "id":"string",
-    "timeCreated":"number",
+    "timeCreated":"2019-02-25T20:13:10Z",
     "timeLastModified":"2019-02-25T20:13:10Z",
     "organization":"string",
     "name":"string",
@@ -37,7 +37,7 @@
       "string"
     ],
     "onDuty":"boolean",
-    "timeLastSeen":"number",
+    "timeLastSeen":"2019-02-25T20:13:10Z",
     "capacity":"number",
     "userData":{  
       "deviceDescription":"string",
@@ -87,7 +87,7 @@
   },
   "teams": {  
     "id":"string",
-    "timeCreated":"number",
+    "timeCreated":"2019-02-25T20:13:10Z",
     "timeLastModified":"2019-02-25T20:13:10Z",
     "name":"string",
     "workers":[  
@@ -103,7 +103,7 @@
   },
   "tasks": {  
     "id":"string",
-    "timeCreated":"number",
+    "timeCreated":"2019-02-25T20:13:10Z",
     "timeLastModified":"2019-02-25T20:13:10Z",
     "organization":"string",
     "shortId":"string",
@@ -125,7 +125,7 @@
         "string"
       ],
       "failureReason":"string",
-      "time":"number",
+      "time":"2019-02-25T20:13:10Z",
       "firstLocation":[  
         "string"
       ],
@@ -157,7 +157,7 @@
       {  
         "id":"string",
         "organization":"string",
-        "timeCreated":"number",
+        "timeCreated":"2019-02-25T20:13:10Z",
         "timeLastModified":"2019-02-25T20:13:10Z",
         "name":"string",
         "phone":"string",
@@ -170,7 +170,7 @@
     ],
     "destination":{  
       "id":"string",
-      "timeCreated":"number",
+      "timeCreated":"2019-02-25T20:13:10Z",
       "timeLastModified":"2019-02-25T20:13:10Z",
       "location":[  
         "number",

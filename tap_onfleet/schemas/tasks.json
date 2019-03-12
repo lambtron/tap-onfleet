@@ -13,8 +13,9 @@
     "timeCreated": {
       "type": [
         "null",
-        "number"
-      ]
+        "string"
+      ],
+      "format": "date-time"
     },
     "timeLastModified": {
       "type": [
@@ -124,8 +125,9 @@
         "time": {
           "type": [
             "null",
-            "number"
-          ]
+            "string"
+          ],
+          "format": "date-time"
         },
         "firstLocation": {
           "type": [
@@ -253,8 +255,9 @@
           "timeCreated": {
             "type": [
               "null",
-              "number"
-            ]
+              "string"
+            ],
+            "format": "date-time"
           },
           "timeLastModified": {
             "type": [
@@ -312,8 +315,9 @@
         "timeCreated": {
           "type": [
             "null",
-            "number"
-          ]
+            "string"
+          ],
+          "format": "date-time"
         },
         "timeLastModified": {
           "type": [

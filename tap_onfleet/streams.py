@@ -47,23 +47,18 @@ class Stream():
         self.client = client
 
 
-    def epoch_to_datetime_string(self, milliseconds):
-        return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(milliseconds / 1000))
-
-
     def get_bookmark(self, state):
         return (singer.get_bookmark(state, self.name, self.replication_key)) or Context.config["start_date"]
 
 
     def update_bookmark(self, state, value):
         if self.is_bookmark_old(state, value):
-            singer.write_bookmark(state, self.name, self.replication_key, self.epoch_to_datetime_string(value))
+            singer.write_bookmark(state, self.name, self.replication_key, value)
 
 
     def is_bookmark_old(self, state, value):
-        current_value = self.epoch_to_datetime_string(value)
         current_bookmark = self.get_bookmark(state)
-        return utils.strptime_with_tz(current_value) > utils.strptime_with_tz(current_bookmark)
+        return utils.strptime_with_tz(value) > utils.strptime_with_tz(current_bookmark)
 
 
     def load_schema(self):
@@ -104,13 +99,11 @@ class Stream():
 
         if self.replication_method == "INCREMENTAL":
             try:
-                for idx, val in enumerate(res):
-                    item = res[idx]
+                for item in res:
                     self.update_bookmark(state, item[self.replication_key])
-                    item[self.replication_key] = self.epoch_to_datetime_string(item[self.replication_key])
                     yield (self.stream, item)
 
-            except (TypeError, KeyError):
+            except (TypeError, KeyError) as e:
                 yield (self.stream, res)
 
         elif self.replication_method == "FULL_TABLE":

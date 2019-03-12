@@ -13,8 +13,9 @@
     "timeCreated": {
       "type": [
         "null",
-        "number"
-      ]
+        "string"
+      ],
+      "format": "date-time"
     },
     "timeLastModified": {
       "type": [
@@ -69,8 +70,9 @@
     "timeLastSeen": {
       "type": [
         "null",
-        "number"
-      ]
+        "string"
+      ],
+      "format": "date-time"
     },
     "capacity": {
       "type": [

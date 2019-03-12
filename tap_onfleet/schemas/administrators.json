@@ -13,8 +13,9 @@
     "timeCreated": {
       "type": [
         "null",
-        "number"
-      ]
+        "string"
+      ],
+      "format": "date-time"
     },
     "timeLastModified": {
       "type": [
