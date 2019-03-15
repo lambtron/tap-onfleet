@@ -30,7 +30,7 @@ class Onfleet(object):
   def _epoch_to_datetime_string(self, milliseconds):
     datetime_string = None
     try:
-      datetime_string = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(milliseconds / 1000))
+      datetime_string = time.strftime('%Y-%m-%d %H:%M:%S %Z', time.localtime(milliseconds / 1000))
     except TypeError:
       pass
     return datetime_string
@@ -42,7 +42,10 @@ class Onfleet(object):
 
   def _list_epoch_to_datetime_string(self, array):
     for i, v in enumerate(array):
-      array[i] = self._dictionary_epoch_to_datetime_string(v)
+      try:
+        array[i] = self._dictionary_epoch_to_datetime_string(v)
+      except AttributeError:
+        pass
     return array
 
 
@@ -57,12 +60,16 @@ class Onfleet(object):
     for k, v in dictionary.items():
       if isinstance(v, dict):
         dictionary[k] = self._dictionary_epoch_to_datetime_string(v)
+      if isinstance(v, list):
+        dictionary[k] = self._list_epoch_to_datetime_string(v)
       for datetime_key in datetime_keys:
         if k == datetime_key:
           dictionary[k] = self._epoch_to_datetime_string(v)
     return dictionary
 
 
+  # Throttling: max is 20 requests per second.
+  # http://docs.onfleet.com/docs/throttling
   def _check_rate_limit(self, rate_limit_remaining=None, rate_limit_limit=None):
     if float(rate_limit_remaining) / float(rate_limit_limit) * 100 < self.quota_limit:
       time.sleep(2000)
@@ -89,17 +96,20 @@ class Onfleet(object):
     # append `lastId=` to the endpoint, see if there is any response.
     has_more = True
     last_id = None
-    new_path = path
+    new_path = "{path}/all".format(path=path)
     while has_more:
-      res = self._get(path, bookmark, last_id)
+      res = self._get(new_path, bookmark, last_id)
 
-      if len(res) == 0:
+      # Note this only works for `tasks`.
+      items = res[path]
+
+      try:
+        last_id = res["lastId"]
+      except AttributeError:
         has_more = False
-        break
+        pass
 
-      last_id = res[-1]["id"]
-
-      for item in res:
+      for item in items:
         new_item = self._dictionary_epoch_to_datetime_string(item)
         yield new_item
 
