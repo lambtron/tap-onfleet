@@ -1,4 +1,6 @@
 
+import types
+
 #
 # Module dependencies.
 #
@@ -90,28 +92,7 @@ class Onfleet(object):
     response.raise_for_status()
     self._check_rate_limit(response.headers.get('X-RateLimit-Remaining'), response.headers.get('X-RateLimit-Limit'))
     return response.json()
-
-
-  def _get_all(self, path, bookmark, **kwargs):
-    # append `lastId=` to the endpoint, see if there is any response.
-    has_more = True
-    last_id = None
-    new_path = "{path}/all".format(path=path)
-    while has_more:
-      res = self._get(new_path, bookmark, last_id)
-
-      # Note this only works for `tasks`.
-      items = res[path]
-
-      try:
-        last_id = res["lastId"]
-      except AttributeError:
-        has_more = False
-        pass
-
-      for item in items:
-        new_item = self._dictionary_epoch_to_datetime_string(item)
-        yield new_item
+    
 
   # 
   # Methods to retrieve data per stream/resource.
@@ -137,7 +118,25 @@ class Onfleet(object):
 
 
   def tasks(self, column_name=None, bookmark=None):
-    return self._get_all("tasks", bookmark)
+    has_more = True
+    last_id = None
+    path = "tasks/all"
+    from_date = bookmark
+
+    while has_more:
+      res = self._get(path, from_date, last_id)
+      tasks = res["tasks"]
+
+      try:
+        last_id = res["lastId"]
+      except KeyError:
+        has_more = False
+        pass
+
+      for task in tasks:
+        new_task = self._dictionary_epoch_to_datetime_string(task)
+        from_date = new_task["timeLastModified"]
+        yield new_task
 
 
   def teams(self, column_name=None, bookmark=None):
