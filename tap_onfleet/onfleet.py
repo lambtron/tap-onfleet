@@ -1,6 +1,4 @@
 
-import types
-
 #
 # Module dependencies.
 #
@@ -73,7 +71,7 @@ class Onfleet(object):
   # Throttling: max is 20 requests per second.
   # http://docs.onfleet.com/docs/throttling
   def _check_rate_limit(self, rate_limit_remaining=None, rate_limit_limit=None):
-    if float(rate_limit_remaining) / float(rate_limit_limit) * 100 < self.quota_limit:
+    if float(rate_limit_remaining) / float(rate_limit_limit) * 100 < float(self.quota_limit):
       time.sleep(2000)
 
 
